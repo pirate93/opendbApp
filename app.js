@@ -31,41 +31,52 @@ movieApp.config(['$routeProvider', '$locationProvider',function($routeProvider, 
 		$locationProvider.html5Mode(true);
 	}]);
 
-movieApp.factory('searchValueService',function($rootScope, $timeout){
+movieApp.factory('searchValueService',function($rootScope, $timeout, $http){
   	var service = {};
 
-  	service.data = false;
-
+  	service.data = '';
+  	service.others = '';
+  	var self = this;
   	service.sendData = function(data){
-      	this.data = data;
-      	$timeout(function(){
-        	$rootScope.$broadcast('data_shared');
-      	},100);
+     	return $http.get("http://www.omdbapi.com/?t="+data+"&tomatoes=true&plot=full&r=json");
   	};
-
+  	service.sendOthers = function (data) {
+  		return $http.get("http://www.omdbapi.com/?s="+data);
+  	}
   	service.getData = function(){
     	return this.data;
   	};
-
+  	console.log(service);
   	return service;
 	});
 
 movieApp.controller('MainController', ['$scope', function($scope){
-		$scope.background = 'mainPage';
+		$scope.background = ' page mainPage';
 	}]);
 
-movieApp.controller('SearchController', ['$scope', 'searchValueService', function($scope, searchValueService){
-		$scope.background = "searchPage";
+movieApp.controller('SearchController', ['$scope', 'searchValueService', '$timeout', '$rootScope',function($scope, searchValueService, $timeout, $rootScope){
+		$scope.background = "page searchPage";
 		$scope.searchValue = "";
 		$scope.send = function () {
-			searchValueService.sendData($scope.searchValue);
+			searchValueService.sendData($scope.searchValue)
+				.then(function (response) {
+					searchValueService.data = response.data;
+					searchValueService.sendOthers($scope.searchValue)
+						.then(function (response) {
+							searchValueService.others = response.data.Search;
+						$timeout(function(){
+			        	$rootScope.$broadcast('data_shared');
+			      		},500);
+					});
+				});
 		}
 		
 	}]);
 
 movieApp.controller('ResultController', ['$scope', 'searchValueService', '$http',function($scope, searchValueService, $http){
-		$scope.background = 'resultPage';
+		$scope.background = '';
 		$scope.$on('data_shared',function(){
-              $scope.searchValue = searchValueService.getData();
+            $scope.searchValue = searchValueService.getData();
+            $scope.others = searchValueService.others;
         });
 	}]);
