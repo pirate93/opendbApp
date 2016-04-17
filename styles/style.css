@@ -16,7 +16,7 @@
 }
 
 .resultPage {
-	background:#E59400 !important; color:#a55400;
+	background:#EAEAEA !important; color:#583A3A;
 }
 
 .searchInput {
@@ -53,6 +53,40 @@
 	font-size: 100px;
 	color: #fff;
 }
+
+
+/*Results*/
+
+.siteBrand {
+    margin-bottom: 0;
+}
+
+.shift-right {
+    padding-left: 50px;
+}
+
+.movieTitle{
+    font-size: 25px;
+}
+
+.font-b {
+    font-size: 17px;
+}
+
+.font-c {
+    font-size: 15px;
+}
+
+
+img {
+    max-height: 350px;
+}
+
+.headings {
+    color: #D4152D;
+    font-size: 17px;
+}
+
 
 
 

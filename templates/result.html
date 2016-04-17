@@ -1,8 +1,55 @@
-<div class="container">
-	<div class="row">
-		<h1>Welcome to results page bro</h1>	
+<div class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<p class="navbar-brand siteBrand"><b>The movie results</b></p>
+			</div>
+		</div>
 	</div>
-	<div class="row">
-		<div>{{searchValue}}</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4">
+				<!-- <img src="http://placehold.it/350x250" class="thumbnail img-responsive"> -->
+				<img ng-src="{{searchValue.Poster}}" class="thumbnail img-responsive">
+			</div>
+			<div class="col-sm-8 shift-right">
+				<div class="row">
+					<div class="col-sm-12">
+						<p><span class="movieTitle"><b>{{searchValue.Title}}, </b></span>{{searchValue.Year}}</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="font-c">
+							<p><span class="headings">Released:</span> {{searchValue.Released}}</p>
+							<p><span class="headings">Runtime:</span> {{searchValue.Runtime}}</p>
+							<p><span class="headings">Genre:</span> {{searchValue.Genre}}</p>
+							<p><span class="headings">Rated:</span> {{searchValue.Rated}}</p>
+							<p><span class="headings">Language:</span> {{searchValue.Language}}</p>
+							<p><span class="headings">Country:</span> {{searchValue.Country}}</p>
+						</div>
+					</div>
+					<div class="col-sm-6 shift-right">
+						<div class="font-c">
+							<p><span class="headings">Director:</span> {{searchValue.Director}}</p>
+							<p><span class="headings">Writer:</span> {{searchValue.Writer}}</p>
+							<p><span class="headings">Actors:</span> {{searchValue.Actors}}</p>
+							<p><span class="headings">Rated:</span> {{searchValue.Rated}}</p>
+							<p><span class="headings">Awards:</span> {{searchValue.Awards}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-8 font-c">
+				<p class="font-c"><span class="headings">Plot:</span></p>
+				<p>{{searchValue.Plot}}</p>
+			</div>
+			<div class="col-sm-4 font-c shift-right">
+				<p class="font-c"><span class="headings">Metascore:</span> {{searchValue.Metascore}}</p>
+				<p class="font-c"><span class="headings">ImdbRating:</span> {{searchValue.imdbRating}}</p>
+				<p class="font-c"><span class="headings">ImdbVotes:</span> {{searchValue.imdbVotes}}</p>
+				<p class="font-c"><span class="headings">ImdbLink:</span> <a href="http://imdb.com/title/{{searchValue.imdbID}}" target="_blank">{{searchValue.Title}}</a></p>
+			</div>
+		</div>
 	</div>
-</div>
